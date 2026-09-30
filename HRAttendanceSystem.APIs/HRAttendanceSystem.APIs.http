@@ -1,0 +1,6 @@
+@HRAttendanceSystem.APIs_HostAddress = http://localhost:5116
+
+GET {{HRAttendanceSystem.APIs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

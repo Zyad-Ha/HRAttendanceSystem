@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36717.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAttendanceSystem.APIs", "HRAttendanceSystem.APIs\HRAttendanceSystem.APIs.csproj", "{4CA9F646-5186-4168-B5B3-2A75B96BC2BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DBB15A05-C631-400D-861B-594E9D67A39C} = {DBB15A05-C631-400D-861B-594E9D67A39C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAttendanceSystem.DAL", "HRAttendanceSystem.DAL\HRAttendanceSystem.DAL.csproj", "{8A46B5F9-17EF-459F-8713-43D60F43AB7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRAttendanceSystem.BL", "HRAttendanceSystem.BL\HRAttendanceSystem.BL.csproj", "{DBB15A05-C631-400D-861B-594E9D67A39C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8A46B5F9-17EF-459F-8713-43D60F43AB7D} = {8A46B5F9-17EF-459F-8713-43D60F43AB7D}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CA9F646-5186-4168-B5B3-2A75B96BC2BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA9F646-5186-4168-B5B3-2A75B96BC2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA9F646-5186-4168-B5B3-2A75B96BC2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA9F646-5186-4168-B5B3-2A75B96BC2BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A46B5F9-17EF-459F-8713-43D60F43AB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A46B5F9-17EF-459F-8713-43D60F43AB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A46B5F9-17EF-459F-8713-43D60F43AB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A46B5F9-17EF-459F-8713-43D60F43AB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB15A05-C631-400D-861B-594E9D67A39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB15A05-C631-400D-861B-594E9D67A39C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB15A05-C631-400D-861B-594E9D67A39C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB15A05-C631-400D-861B-594E9D67A39C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA2C3EE9-8C5F-4FC6-A22A-7560F97C7FAB}
+	EndGlobalSection
+EndGlobal
