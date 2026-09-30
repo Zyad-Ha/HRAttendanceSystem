@@ -24,7 +24,7 @@ namespace HRAttendanceSystem.BL.Services.EmployeeService
                 Name = employeeDto.Name,
                 Department = employeeDto.Department,
                 Email = employeeDto.Email,
-                HireDate = employeeDto.HireDate
+                HireDate = DateTime.Now
             };
             _Erepo.Add(newEmp);
             _Erepo.SaveChanges();
@@ -36,9 +36,13 @@ namespace HRAttendanceSystem.BL.Services.EmployeeService
             _Erepo.SaveChanges();
         }
 
-        public IEnumerable<ReadEmployeeDTO> GetAll()
+        public IEnumerable<ReadEmployeeDTO> GetAll(int pageNumper = 1,int pageSize = 10)
         {
-            return _Erepo.GetAll().Select(e => new ReadEmployeeDTO
+            int SkipAmount = (pageNumper - 1) * pageSize;
+            return _Erepo.GetAll()
+                .Skip(SkipAmount)
+                .Take(pageSize)
+                .Select(e => new ReadEmployeeDTO
             {
                 Id = e.Id,
                 Name = e.Name,
@@ -73,7 +77,6 @@ namespace HRAttendanceSystem.BL.Services.EmployeeService
                 OldEmp.Name = employeeDto.Name;
                 OldEmp.Email = employeeDto.Email;
                 OldEmp.Department = employeeDto.Department;
-                OldEmp.HireDate = employeeDto.HireDate;
                 _Erepo.Update(OldEmp);
                 _Erepo.SaveChanges();
             }

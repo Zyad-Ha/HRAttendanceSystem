@@ -14,8 +14,8 @@ namespace HRAttendanceSystem.BL.DTOs.AttendanceDTOs
         public int Id { get; set; }
         public int EmployeeId { get; set; }
         public DateOnly Date { get; set; }
-        public TimeSpan CheckIn { get; set; }
-        public TimeSpan? CheckOut { get; set; }
+        public TimeOnly CheckIn { get; set; }
+        public TimeOnly? CheckOut { get; set; }
         public TimeSpan? TotalHours { get; set; }
     }
 }

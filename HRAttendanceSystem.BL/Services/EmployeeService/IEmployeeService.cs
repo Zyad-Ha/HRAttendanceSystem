@@ -9,7 +9,7 @@ namespace HRAttendanceSystem.BL.Services.EmployeeService
 {
     public interface IEmployeeService
     {
-        public IEnumerable<ReadEmployeeDTO> GetAll();
+        public IEnumerable<ReadEmployeeDTO> GetAll(int pageNumber,int pageSize);
         public ReadEmployeeDTO GetById(int id);
         public void Add(WriteEmployeeDTO employeeDto);
         public void Update(int id,WriteEmployeeDTO employeeDto);

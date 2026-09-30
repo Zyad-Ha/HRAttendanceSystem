@@ -16,9 +16,14 @@ namespace HRAttendanceSystem.APIs.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult GetAll(int pageNumber = 1, int pageSize = 10)
         {
-            return Ok(_employeeService.GetAll());
+            var employee = _employeeService.GetAll(pageNumber,pageSize);
+            if (!employee.Any())
+            {
+                return NotFound("there is no employees added yet");
+            }
+            return Ok(employee);
         }
 
         [HttpGet("{id}")]

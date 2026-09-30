@@ -1,4 +1,4 @@
-﻿using HRAttendanceSystem.BL.DTOs.AttendanceDTOs;
+﻿    using HRAttendanceSystem.BL.DTOs.AttendanceDTOs;
 using HRAttendanceSystem.DAL.Model;
 using HRAttendanceSystem.DAL.Repos.AttendanceRepo;
 using HRAttendanceSystem.DAL.Repos.EmployeeRepo;
@@ -35,7 +35,7 @@ namespace HRAttendanceSystem.BL.Services.AttendanceService
                 CheckIn = x.CheckIn,
                 CheckOut = x.CheckOut,
                 Date = x.Date,
-                TotalHours = x.CheckOut != null ? (x.CheckOut - x.CheckIn) : null
+                TotalHours = x.CheckOut.HasValue? (x.CheckOut.Value - x.CheckIn) :null
             }).ToList();
         }
 
@@ -48,7 +48,7 @@ namespace HRAttendanceSystem.BL.Services.AttendanceService
                 CheckIn = i.CheckIn,
                 CheckOut = i.CheckOut,
                 Date = i.Date,
-                TotalHours = i.CheckOut != null ? (i.CheckOut - i.CheckIn) : null
+                TotalHours = i.CheckOut.HasValue? (i.CheckOut.Value - i.CheckIn) :null
 
             }).ToList();
         }
@@ -64,7 +64,7 @@ namespace HRAttendanceSystem.BL.Services.AttendanceService
                     CheckIn = i.CheckIn,
                     CheckOut = i.CheckOut,
                     Date = i.Date,
-                    TotalHours = i.CheckOut != null ? (i.CheckOut - i.CheckIn) : null
+                    TotalHours = i.CheckOut.HasValue? (i.CheckOut - i.CheckIn) : null
 
                 }).ToList();
         }
@@ -81,7 +81,7 @@ namespace HRAttendanceSystem.BL.Services.AttendanceService
                     CheckIn = exist.CheckIn,
                     CheckOut = exist.CheckOut,
                     Date = exist.Date,
-                    TotalHours = exist.CheckOut != null ? (exist.CheckOut - exist.CheckIn) : null
+                    TotalHours = exist.CheckOut.HasValue? (exist.CheckOut.Value - exist.CheckIn) : null
 
                 };
             }
@@ -104,7 +104,7 @@ namespace HRAttendanceSystem.BL.Services.AttendanceService
             {
                 EmployeeId = checkIn.EmployeeId,
                 Date = todayDateRecord,
-                CheckIn = DateTime.Now.TimeOfDay
+                CheckIn = TimeOnly.FromDateTime(DateTime.Now)
             };
             _ARepo.Add(NewCheckIn);
             _ARepo.SaveChanges();
@@ -119,19 +119,25 @@ namespace HRAttendanceSystem.BL.Services.AttendanceService
             var checkInRecord = _ARepo.GetEmployeeId(EmpId)
                 .FirstOrDefault(a => a.Date == today);
 
-            if (checkInRecord != null)
+            if (checkInRecord == null)
             {
-                var currentTime = DateTime.Now.TimeOfDay;
-
-                if (currentTime <= checkInRecord.CheckIn)
-                {
-                    throw new Exception("You cannot check out without check in first.");
-                }
-                checkInRecord.CheckOut = currentTime;
-                _ARepo.Update(checkInRecord);
-                _ARepo.SaveChanges();
+                throw new Exception("You didn't check in today");
             }
-            throw new Exception("You didn't check in today");
+
+            if (checkInRecord.CheckOut != null)
+            {
+                throw new Exception("You already checked out today.");
+            }
+
+            var currentTime = TimeOnly.FromDateTime(DateTime.Now);
+            if (currentTime < checkInRecord.CheckIn)
+            {
+                throw new Exception("Check out time must be after check in time.");
+            }
+
+            checkInRecord.CheckOut = currentTime;
+            _ARepo.Update(checkInRecord);
+            _ARepo.SaveChanges();
         }
     }
 }
